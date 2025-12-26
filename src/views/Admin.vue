@@ -15,43 +15,22 @@ const onFileChange = (e) => {
   }
 };
 
-const uploadProject = async () => {
+const uploadProject = () => {
   if (!file.value || !title.value || !description.value) {
     message.value = 'Please fill all fields';
     return;
   }
   
-  const formData = new FormData();
-  formData.append('title', title.value);
-  formData.append('description', description.value);
-  formData.append('image', file.value);
-  // Add tags input later, for now hardcoded or added to form
-  formData.append('tags', 'New, Project'); 
-
   message.value = 'Uploading...';
   
-  try {
-    const res = await fetch('http://localhost:3000/api/projects', {
-      method: 'POST',
-      body: formData
-    });
-    
-    if (res.ok) {
-      message.value = 'Project uploaded successfully!';
-      title.value = '';
-      description.value = '';
-      file.value = null;
-      preview.value = null;
-      
-      // Optional: Refresh list or notify
-    } else {
-      const data = await res.json();
-      message.value = 'Upload failed: ' + (data.error || 'Unknown error');
-    }
-  } catch (err) {
-    message.value = 'Error uploading project';
-    console.error(err);
-  }
+  // Simulate success for static demo
+  setTimeout(() => {
+    message.value = 'Demo: Project added (not persisted in static mode)!';
+    title.value = '';
+    description.value = '';
+    file.value = null;
+    preview.value = null;
+  }, 1000);
 };
 </script>
 

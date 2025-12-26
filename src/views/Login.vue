@@ -7,25 +7,13 @@ const password = ref('');
 const router = useRouter();
 const error = ref('');
 
-const login = async () => {
-  try {
-    const res = await fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username.value, password: password.value })
-    });
-    const data = await res.json();
-    
-    if (res.ok) {
-      localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('user', JSON.stringify(data.user));
-      router.push('/admin');
-    } else {
-      error.value = data.error || 'Login failed';
-    }
-  } catch (err) {
-    error.value = 'An error occurred';
-    console.error(err);
+const login = () => {
+  // Static check for demo purposes
+  if (username.value === 'admin' && password.value === 'admin') {
+    localStorage.setItem('isAuthenticated', 'true');
+    router.push('/admin');
+  } else {
+    error.value = 'Invalid credentials';
   }
 };
 </script>

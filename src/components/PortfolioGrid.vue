@@ -1,16 +1,36 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
-const projects = ref([]);
-
-onMounted(async () => {
-  try {
-    const res = await fetch('http://localhost:3000/api/projects');
-    projects.value = await res.json();
-  } catch (err) {
-    console.error('Failed to fetch projects', err);
+const projects = ref([
+  {
+    id: 1,
+    title: 'E-Commerce Platform',
+    description: 'A full-stack e-commerce solution with Laravel and Vue.',
+    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
+    tags: 'Laravel, Vue, MySQL'
+  },
+  {
+    id: 2,
+    title: 'Mobile Banking App',
+    description: 'Secure and fast mobile banking experience built with Flutter.',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
+    tags: 'Flutter, Dart, Firebase'
+  },
+  {
+    id: 3,
+    title: 'Real-time Chat',
+    description: 'Websocket-based chat application using Node.js and Socket.io.',
+    image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&q=80',
+    tags: 'Node.js, Socket.io, React'
+  },
+  {
+    id: 4,
+    title: 'Portfolio V1',
+    description: 'Previous version of my portfolio built with plain HTML/CSS.',
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80',
+    tags: 'HTML, CSS, JS'
   }
-});
+]);
 </script>
 
 <template>
@@ -23,7 +43,7 @@ onMounted(async () => {
     <div class="grid">
       <div v-for="project in projects" :key="project.id" class="card">
         <div class="image-wrapper">
-          <img :src="project.image.startsWith('http') ? project.image : `http://localhost:3000${project.image}`" :alt="project.title" loading="lazy" />
+          <img :src="project.image" :alt="project.title" loading="lazy" />
           <div class="overlay">
             <button class="view-btn">View Details</button>
           </div>
